@@ -38,7 +38,7 @@ fun SplashScreen(modifier: Modifier = Modifier, navigateToMain: () -> Unit) {
             color = colorScheme.primary
         )
         LaunchedEffect(Unit) {
-            kotlinx.coroutines.delay(1750)
+            kotlinx.coroutines.delay(2000)
             navigateToMain()
         }
     }

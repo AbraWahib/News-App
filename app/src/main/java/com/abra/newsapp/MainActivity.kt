@@ -7,11 +7,13 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.abra.newsapp.ui.screens.NewsApp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.abra.newsapp.presentation.onboarding.OnBoardingScreen
+import com.abra.newsapp.ui.screens.SplashScreen
 import com.abra.newsapp.ui.theme.NewsAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -28,3 +30,17 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@Composable
+fun NewsApp(modifier: Modifier = Modifier) {
+    val navController = rememberNavController()
+    NavHost(navController = navController, startDestination = "splash_screen") {
+        composable("splash_screen")  {
+            SplashScreen(modifier) {
+                navController.navigate("main_screen")
+            }
+        }
+        composable("main_screen") {
+            OnBoardingScreen(modifier)
+        }
+    }
+}
