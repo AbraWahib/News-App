@@ -1,7 +1,10 @@
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-
+    alias(libs.plugins.compose.compiler)
+    id("com.google.devtools.ksp")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -50,8 +53,21 @@ android {
     }
 }
 
+composeCompiler {
+    reportsDestination = layout.buildDirectory.dir("compose_compiler")
+//    stabilityConfigurationFile = rootProject.layout.projectDirectory.file("stability_config.conf") // THIS LINE
+}
+
 dependencies {
-    implementation("androidx.navigation:navigation-compose:2.8.7")
+    val roomVersion = "2.6.1"
+    val navVersion = "2.8.7"
+    val hiltVersion = "2.48.1"
+    val hiltCompilerVersion = "1.1.0"
+    val retrofitVersion = "2.9.0"
+    val okhttpVersion = "4.12.0"
+    val coilVersion = "2.4.0"
+    val dataStoreVersion = "1.1.0"
+    val pagingVersion = "3.2.1"
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -68,4 +84,42 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    //Navigation
+    implementation("androidx.navigation:navigation-compose:$navVersion")
+
+    //Room
+    implementation("androidx.room:room-runtime:$roomVersion")
+    ksp("androidx.room:room-compiler:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
+    implementation("androidx.room:room-paging:$roomVersion")
+
+    //Dagger Hilt
+    implementation("com.google.dagger:hilt-android:$hiltVersion")
+    ksp("com.google.dagger:hilt-compiler:$hiltVersion")
+    implementation("androidx.hilt:hilt-navigation-compose:$hiltCompilerVersion")
+
+    //Retrofit
+    implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
+    implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
+    implementation("com.squareup.okhttp3:logging-interceptor:$okhttpVersion")
+
+    //Coil
+    implementation("io.coil-kt:coil-compose:$coilVersion")
+
+    //Data store
+    implementation("androidx.datastore:datastore-preferences:$dataStoreVersion")
+
+    //Compose Foundation
+    implementation("androidx.compose.foundation:foundation:1.4.3")
+
+    //Paging
+    implementation("androidx.paging:paging-runtime:$pagingVersion")
+    implementation("androidx.paging:paging-compose:$pagingVersion")
+
+    //Accompanist
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.31.4-beta")
+
+    //Splash Screen
+    implementation("androidx.core:core-splashscreen:1.0.1")
 }
