@@ -87,6 +87,7 @@ dependencies {
 
     //Navigation
     implementation("androidx.navigation:navigation-compose:$navVersion")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
     //Room
     implementation("androidx.room:room-runtime:$roomVersion")

@@ -1,6 +1,5 @@
 package com.abra.newsapp.presentation.onboarding
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -9,24 +8,20 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.abra.newsapp.presentation.common.PageIndicator
-import com.abra.newsapp.ui.theme.NewsAppTheme
-import kotlinx.coroutines.launch
 import com.abra.newsapp.presentation.common.FilledButton
 import com.abra.newsapp.presentation.common.OutlineButton
+import com.abra.newsapp.presentation.common.PageIndicator
+import kotlinx.coroutines.launch
 
 @Composable
-fun OnBoardingScreen(modifier: Modifier = Modifier) {
+fun OnBoardingScreen(modifier: Modifier = Modifier, onEvent: (OnBoardingEvents) -> Unit) {
     Column(
         modifier = modifier.fillMaxSize()
     ) {
@@ -74,15 +69,15 @@ fun OnBoardingScreen(modifier: Modifier = Modifier) {
                 val isLastPage = pagerState.currentPage == pages.size - 1
                 FilledButton(
                     text = buttonState.value[1],
-                ) {
-                    if (isLastPage) {
-                        // TODO: Navigate to main screen
-                    } else {
-                        scope.launch {
-                            pagerState.animateScrollToPage(page = pagerState.currentPage + 1)
+                    onClick = {
+                        if (isLastPage) {
+                            onEvent(OnBoardingEvents.SaveAppEntryEvent)
+                        } else {
+                            scope.launch {
+                                pagerState.animateScrollToPage(page = pagerState.currentPage + 1)
+                            }
                         }
-                    }
-                }
+                    })
 
             }
         }
@@ -90,16 +85,3 @@ fun OnBoardingScreen(modifier: Modifier = Modifier) {
     }
 }
 
-@Preview(showSystemUi = true, showBackground = true)
-@Composable
-private fun P() {
-    NewsAppTheme {
-        Scaffold(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(color = MaterialTheme.colorScheme.background)
-        ) { innerPadding ->
-            OnBoardingScreen(modifier = Modifier.padding(innerPadding))
-        }
-    }
-}
