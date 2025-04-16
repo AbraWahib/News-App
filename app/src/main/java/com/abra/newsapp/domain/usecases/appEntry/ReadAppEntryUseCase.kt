@@ -1,4 +1,4 @@
-package com.abra.newsapp.domain.usecases
+package com.abra.newsapp.domain.usecases.appEntry
 
 import com.abra.newsapp.domain.manager.LocalUserManager
 import kotlinx.coroutines.flow.Flow

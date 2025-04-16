@@ -14,7 +14,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
-import com.abra.newsapp.domain.usecases.AppEntryUseCases
+import com.abra.newsapp.domain.usecases.appEntry.AppEntryUseCases
 import com.abra.newsapp.presentation.nav_graph.FirstScreen
 import com.abra.newsapp.ui.theme.NewsAppTheme
 import dagger.hilt.android.AndroidEntryPoint

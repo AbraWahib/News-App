@@ -1,4 +1,4 @@
-package com.abra.newsapp.domain.usecases
+package com.abra.newsapp.domain.usecases.appEntry
 
 data class AppEntryUseCases(
     val readAppEntryUseCase: ReadAppEntryUseCase,
