@@ -18,8 +18,6 @@ val Mada = FontFamily(
 // Define Manjari font for body and labels
 val Manjari = FontFamily(
     Font(R.font.manjari_regular, FontWeight.Normal),
-    Font(R.font.manjari_bold, FontWeight.Bold),
-    Font(R.font.manjari_thin, FontWeight.Thin)
 )
 
 // Define Material 3 Typography

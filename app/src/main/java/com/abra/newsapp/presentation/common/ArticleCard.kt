@@ -30,6 +30,7 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.abra.newsapp.domain.model.Article
 import com.abra.newsapp.domain.model.Source
+import com.abra.newsapp.ui.theme.NewsAppTheme
 
 @Composable
 fun ArticleCard(
@@ -90,7 +91,7 @@ fun ArticleCard(
 @Preview
 @Composable
 private fun P() {
-    MaterialTheme {
+    NewsAppTheme {
         Scaffold(
             Modifier.background(color = MaterialTheme.colorScheme.background)
         ) {
