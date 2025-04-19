@@ -31,6 +31,7 @@ import coil.request.ImageRequest
 import com.abra.newsapp.domain.model.Article
 import com.abra.newsapp.domain.model.Source
 import com.abra.newsapp.ui.theme.NewsAppTheme
+import com.abra.newsapp.util.formatNewsTime
 
 @Composable
 fun ArticleCard(
@@ -39,20 +40,22 @@ fun ArticleCard(
     onClick: () -> Unit
 ) {
     Row(
-        modifier.clickable { onClick() },
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = modifier.clickable { onClick() }
     ) {
         AsyncImage(
-            model = ImageRequest.Builder(LocalContext.current).data(article.urlToImage),
+            model = ImageRequest.Builder(LocalContext.current).data(article.urlToImage).build(),
             contentDescription = "News Image",
             modifier = Modifier
-                .size(96.dp)
                 .clip(MaterialTheme.shapes.medium)
+                .size(96.dp)
         )
         Column(
             verticalArrangement = Arrangement.SpaceAround,
             modifier = Modifier
                 .padding(4.dp)
                 .height(96.dp)
+                .weight(1f)
         ) {
             Text(
                 text = article.title,
@@ -78,7 +81,7 @@ fun ArticleCard(
                 )
                 Spacer(modifier = Modifier.width(4.dp))
                 Text(
-                    text = article.publishedAt,
+                    text = article.publishedAt.formatNewsTime(),
                     style = MaterialTheme.typography.labelSmall,
                     color = Color.Gray
                 )

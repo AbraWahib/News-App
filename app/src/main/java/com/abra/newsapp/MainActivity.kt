@@ -15,20 +15,21 @@ import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import com.abra.newsapp.domain.usecases.appEntry.AppEntryUseCases
-import com.abra.newsapp.presentation.nav_graph.FirstScreen
+import com.abra.newsapp.presentation.mainActivity.MainVM
+import com.abra.newsapp.presentation.navgraph.NavGraph
 import com.abra.newsapp.ui.theme.NewsAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity() : ComponentActivity() {
+class MainActivity : ComponentActivity() {
     private val vm by viewModels<MainVM>()
     @Inject
     lateinit var useCases: AppEntryUseCases
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) installSplashScreen().setKeepOnScreenCondition { vm.splashCondition }
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) installSplashScreen().setKeepOnScreenCondition { vm.splashCondition.value }
         enableEdgeToEdge()
         lifecycleScope.launch {
             useCases.readAppEntryUseCase().collect {
@@ -42,8 +43,8 @@ class MainActivity() : ComponentActivity() {
                         .fillMaxSize()
                         .background(color = MaterialTheme.colorScheme.background)
                 ) { innerPadding ->
-                    FirstScreen(
-                        startDestination = vm.startDestination,
+                    NavGraph(
+                        startDestination = vm.startDestination.value,
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
