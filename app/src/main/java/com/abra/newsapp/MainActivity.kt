@@ -29,7 +29,7 @@ class MainActivity : ComponentActivity() {
     lateinit var useCases: AppEntryUseCases
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) installSplashScreen().setKeepOnScreenCondition { vm.splashCondition.value }
+        installSplashScreen().setKeepOnScreenCondition { vm.splashCondition.value }
         enableEdgeToEdge()
         lifecycleScope.launch {
             useCases.readAppEntryUseCase().collect {

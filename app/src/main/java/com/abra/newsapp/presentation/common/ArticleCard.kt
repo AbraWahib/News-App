@@ -3,6 +3,7 @@ package com.abra.newsapp.presentation.common
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -20,7 +21,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -43,23 +46,26 @@ fun ArticleCard(
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier.clickable { onClick() }
     ) {
+
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current).data(article.urlToImage).build(),
             contentDescription = "News Image",
+            contentScale = ContentScale.Fit,
             modifier = Modifier
                 .clip(MaterialTheme.shapes.medium)
                 .size(96.dp)
         )
+
         Column(
             verticalArrangement = Arrangement.SpaceAround,
             modifier = Modifier
                 .padding(4.dp)
-                .height(96.dp)
                 .weight(1f)
+                .height(96.dp),
         ) {
             Text(
                 text = article.title,
-                style = MaterialTheme.typography.bodyMedium.copy(),
+                style = MaterialTheme.typography.bodyMedium,
                 color = Color.Gray,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis
@@ -90,28 +96,3 @@ fun ArticleCard(
     }
 
 }
-
-@Preview
-@Composable
-private fun P() {
-    NewsAppTheme {
-        Scaffold(
-            Modifier.background(color = MaterialTheme.colorScheme.background)
-        ) {
-            ArticleCard(
-                modifier = Modifier.padding(it),
-                article = Article(
-                    title = "Abra is finishing the project !\nI thought he will never do it finally",
-                    source = Source("BBC News", "BBC News"),
-                    publishedAt = "2 hours",
-                )
-            ) {
-
-            }
-        }
-
-    }
-}
-
-
-

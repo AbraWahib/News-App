@@ -22,7 +22,7 @@ fun ArticlesList(
         LazyColumn(
             modifier = modifier,
             verticalArrangement = Arrangement.spacedBy(12.dp),
-            contentPadding = PaddingValues(8.dp)
+            contentPadding = PaddingValues(4.dp)
         ) {
             items(articles.itemCount) {
                 articles[it]?.let { article ->

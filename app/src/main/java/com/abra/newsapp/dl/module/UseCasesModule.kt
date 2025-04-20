@@ -7,6 +7,7 @@ import com.abra.newsapp.domain.usecases.appEntry.ReadAppEntryUseCase
 import com.abra.newsapp.domain.usecases.appEntry.SaveAppEntryUseCase
 import com.abra.newsapp.domain.usecases.news.GetNewsUseCase
 import com.abra.newsapp.domain.usecases.news.NewsUseCases
+import com.abra.newsapp.domain.usecases.news.SearchNewsUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,6 +31,7 @@ object UseCasesModule {
     fun provideNewsUseCases(
         newsRepository: NewsRepository
     ):NewsUseCases = NewsUseCases(
-        getNewsUseCase = GetNewsUseCase(newsRepository)
+        getNewsUseCase = GetNewsUseCase(newsRepository),
+        searchNewsUseCase = SearchNewsUseCase(newsRepository)
     )
 }
