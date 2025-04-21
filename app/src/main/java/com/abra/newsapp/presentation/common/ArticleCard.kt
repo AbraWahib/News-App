@@ -1,9 +1,7 @@
 package com.abra.newsapp.presentation.common
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -15,25 +13,20 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Schedule
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.abra.newsapp.domain.model.Article
-import com.abra.newsapp.domain.model.Source
-import com.abra.newsapp.ui.theme.NewsAppTheme
 import com.abra.newsapp.util.formatNewsTime
 
 @Composable
@@ -50,7 +43,7 @@ fun ArticleCard(
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current).data(article.urlToImage).build(),
             contentDescription = "News Image",
-            contentScale = ContentScale.Fit,
+            contentScale = ContentScale.Crop,
             modifier = Modifier
                 .clip(MaterialTheme.shapes.medium)
                 .size(96.dp)
@@ -60,6 +53,7 @@ fun ArticleCard(
             verticalArrangement = Arrangement.SpaceAround,
             modifier = Modifier
                 .padding(4.dp)
+                .padding(horizontal = 4.dp)
                 .weight(1f)
                 .height(96.dp),
         ) {

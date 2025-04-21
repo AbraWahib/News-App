@@ -2,10 +2,13 @@ package com.abra.newsapp.presentation.search
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.abra.newsapp.presentation.common.ArticlesList
 import com.abra.newsapp.presentation.common.SearchBar
@@ -20,7 +23,10 @@ fun SearchScreen(
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = modifier.statusBarsPadding()
+        modifier = modifier
+            .statusBarsPadding()
+            .padding(horizontal = Dimens.MediumPadding1)
+            .fillMaxSize()
     ) {
 
         SearchBar(
@@ -28,7 +34,7 @@ fun SearchScreen(
             readOnly = false,
             onValueChange = { event(SearchEvent.updateSearchQuery(it)) },
             onSearch = { event(SearchEvent.searchNews) })
-        Spacer(modifier.height(Dimens.MediumPadding1))
+        Spacer(Modifier.height(4.dp))
         state.articles?.let {
             val artists = it.collectAsLazyPagingItems()
             ArticlesList(articles = artists, onClick = {navigate(Route.DetailsScreen.route)})
