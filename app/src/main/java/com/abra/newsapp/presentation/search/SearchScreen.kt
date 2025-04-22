@@ -32,8 +32,8 @@ fun SearchScreen(
         SearchBar(
             text = state.searchQuery,
             readOnly = false,
-            onValueChange = { event(SearchEvent.updateSearchQuery(it)) },
-            onSearch = { event(SearchEvent.searchNews) })
+            onValueChange = { event(SearchEvent.UpdateSearchQuery(it)) },
+            onSearch = { event(SearchEvent.SearchNews) })
         Spacer(Modifier.height(4.dp))
         state.articles?.let {
             val artists = it.collectAsLazyPagingItems()

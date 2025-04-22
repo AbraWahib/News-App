@@ -18,11 +18,11 @@ class SearchVM @Inject constructor(
     val state: State<SearchState> = _state
     fun onEvent(event: SearchEvent) {
         when (event) {
-            is SearchEvent.updateSearchQuery -> {
+            is SearchEvent.UpdateSearchQuery -> {
                 _state.value = state.value.copy(searchQuery = event.searchQuery)
             }
 
-            is SearchEvent.searchNews -> {
+            is SearchEvent.SearchNews -> {
                 searchNews()
             }
         }

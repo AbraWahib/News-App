@@ -11,7 +11,6 @@ import androidx.navigation.navigation
 import com.abra.newsapp.presentation.onboarding.OnBoardingScreen
 import com.abra.newsapp.presentation.onboarding.OnBoardingVM
 import com.abra.newsapp.presentation.search.SearchScreen
-import com.abra.newsapp.presentation.search.SearchState
 import com.abra.newsapp.presentation.search.SearchVM
 
 @Composable
