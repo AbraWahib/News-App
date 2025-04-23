@@ -30,35 +30,35 @@ fun DetailsScreen(
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
-    Scaffold(
-        modifier = modifier
-            .fillMaxWidth(),
-        topBar = {
-            DetailsTopAppBar(
-                onBackClick = navigateUp,
-                onShareClick = {
-                    Intent(Intent.ACTION_SEND).also {
-                        it.putExtra(Intent.EXTRA_TEXT, article.url)
-                        it.type = "text/plain"
-                        if (it.resolveActivity(context.packageManager) != null) {
-                            context.startActivity(it)
-                        }
+    fun onEvent(events: DetailsEvents) {
+        when (events) {
+            DetailsEvents.BookmarkEvent -> event(DetailsEvents.SaveArticleEvent)
+            DetailsEvents.BrowseEvent -> {
+                Intent(Intent.ACTION_VIEW).also {
+                    it.data = article.url.toUri()
+                    if (it.resolveActivity(context.packageManager) != null) {
+                        context.startActivity(it)
                     }
-                },
-                onBrowseClick = {
-                    Intent(Intent.ACTION_VIEW).also {
-                        it.data = article.url.toUri()
-                        if (it.resolveActivity(context.packageManager) != null) {
-                            context.startActivity(it)
-                        }
-                    }
-                },
-                onBookmarkClick = {
-                    event(DetailsEvents.SaveArticleEvent)
                 }
-            )
+            }
+            DetailsEvents.NavigateUpEvent -> navigateUp
+            DetailsEvents.SaveArticleEvent -> {}
+            DetailsEvents.ShareArticleEvent -> {
+                Intent(Intent.ACTION_SEND).also {
+                    it.putExtra(Intent.EXTRA_TEXT, article.url)
+                    it.type = "text/plain"
+                    if (it.resolveActivity(context.packageManager) != null) {
+                        context.startActivity(it)
+                    }
+                }
+            }
         }
-    ) {
+    }
+
+    Scaffold(
+        modifier = modifier.fillMaxWidth(), topBar = {
+            DetailsTopAppBar(event = {onEvent(it)})
+        }) {
         LazyColumn(
             contentPadding = PaddingValues(
                 top = it.calculateTopPadding(),
@@ -79,11 +79,9 @@ fun DetailsScreen(
                 )
                 Spacer(modifier = Modifier.height(Dimens.MediumPadding1))
                 Text(
-                    text = article.title,
-                    style = MaterialTheme.typography.titleMedium.copy(
+                    text = article.title, style = MaterialTheme.typography.titleMedium.copy(
                         fontWeight = FontWeight.Bold
-                    ),
-                    color = MaterialTheme.colorScheme.primary
+                    ), color = MaterialTheme.colorScheme.primary
                 )
                 Spacer(modifier = Modifier.height(Dimens.MediumPadding1))
                 Text(
@@ -93,5 +91,8 @@ fun DetailsScreen(
             }
         }
     }
+
 }
+
+
 

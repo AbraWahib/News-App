@@ -16,10 +16,7 @@ import androidx.compose.ui.Modifier
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailsTopAppBar(
-    onBackClick: () -> Unit,
-    onShareClick: () -> Unit,
-    onBrowseClick: () -> Unit,
-    onBookmarkClick: () -> Unit
+    event: (DetailsEvents) -> Unit,
 ) {
     TopAppBar(
         title = {},
@@ -27,24 +24,24 @@ fun DetailsTopAppBar(
             .fillMaxWidth(),
         navigationIcon = {
             IconButton(
-                onClick = onBackClick
+                onClick = { event(DetailsEvents.NavigateUpEvent) }
             ) {
                 Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Navigate back")
             }
         },
         actions = {
             IconButton(
-                onClick = onBookmarkClick
+                onClick = { event(DetailsEvents.BookmarkEvent) }
             ) {
                 Icon(imageVector = Icons.Outlined.BookmarkBorder, contentDescription = "Bookmark")
             }
             IconButton(
-                onClick = onShareClick
+                onClick = { event(DetailsEvents.ShareArticleEvent) }
             ) {
                 Icon(imageVector = Icons.Outlined.Share, contentDescription = "Share")
             }
             IconButton(
-                onClick = onBrowseClick
+                onClick = { event(DetailsEvents.BrowseEvent) }
             ) {
                 Icon(imageVector = Icons.Outlined.Public, contentDescription = "Browse")
             }
