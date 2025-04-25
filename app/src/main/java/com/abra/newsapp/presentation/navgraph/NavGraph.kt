@@ -1,4 +1,3 @@
-
 package com.abra.newsapp.presentation.navgraph
 
 import androidx.compose.runtime.Composable
@@ -8,10 +7,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
+import com.abra.newsapp.presentation.bookmark.BookmarkScreen
+import com.abra.newsapp.presentation.bookmark.BookmarkVM
 import com.abra.newsapp.presentation.onboarding.OnBoardingScreen
 import com.abra.newsapp.presentation.onboarding.OnBoardingVM
-import com.abra.newsapp.presentation.search.SearchScreen
-import com.abra.newsapp.presentation.search.SearchVM
 
 @Composable
 fun NavGraph(
@@ -36,18 +35,8 @@ fun NavGraph(
             startDestination = Route.NewsNavigatorScreen.route
         ) {
             composable(route = Route.NewsNavigatorScreen.route){
-//                val viewModel:HomeVM = hiltViewModel()
-//                HomeScreen(
-//                    modifier = modifier,
-//                    articles = viewModel.news.collectAsLazyPagingItems()
-//                ) { }
-                val viewModel: SearchVM = hiltViewModel()
-                SearchScreen(
-                    state = viewModel.state.value,
-                    event = viewModel::onEvent,
-                    navigate = {},
-                    modifier = modifier
-                )
+                val bookmarkVM: BookmarkVM = hiltViewModel()
+                BookmarkScreen(state = bookmarkVM.state.value, navigateToDetails = {}, modifier = modifier)
             }
         }
     }

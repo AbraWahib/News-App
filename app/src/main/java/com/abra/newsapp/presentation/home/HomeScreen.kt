@@ -51,19 +51,8 @@ fun HomeScreen(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .padding(top = MediumPadding1)
             .statusBarsPadding()
     ) {
-        Image(
-            painter = painterResource(id = R.drawable.icon_splash),
-            contentDescription = null,
-            modifier = Modifier
-                .width(150.dp)
-                .height(30.dp)
-                .padding(horizontal = MediumPadding1)
-        )
-
-        Spacer(modifier = Modifier.height(MediumPadding1))
 
         SearchBar(
             modifier = Modifier

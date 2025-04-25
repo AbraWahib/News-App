@@ -14,6 +14,26 @@ import com.abra.newsapp.domain.model.Article
 @Composable
 fun ArticlesList(
     modifier: Modifier = Modifier,
+    articles: List<Article>,
+    onClick: (Article) -> Unit
+) {
+    LazyColumn(
+        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(12.dp),
+        contentPadding = PaddingValues(4.dp)
+    ) {
+        items(articles.size) {
+            val article = articles[it]
+            ArticleCard(article = article, onClick = { onClick(article) })
+
+        }
+
+    }
+}
+
+@Composable
+fun ArticlesList(
+    modifier: Modifier = Modifier,
     articles: LazyPagingItems<Article>,
     onClick: (Article) -> Unit
 ) {
@@ -47,10 +67,12 @@ fun handlePagingResult(articles: LazyPagingItems<Article>): Boolean {
             ShimmerEffect()
             false
         }
+
         error != null -> {
             EmptyScreen()
             false
         }
+
         else -> {
             true
         }
