@@ -54,7 +54,7 @@ fun DetailsScreen(
                     }
                 },
                 onBookmarkClick = {
-                    event(DetailsEvents.SaveArticleEvent)
+                    event(DetailsEvents.UpsertOrDeleteArticle(article))
                 }
             )
         }

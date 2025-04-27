@@ -12,14 +12,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import com.abra.newsapp.data.mapper.NewsArticleMapper.mapToArticle
+import com.abra.newsapp.domain.model.Article
 import com.abra.newsapp.presentation.common.ArticlesList
-import com.abra.newsapp.presentation.navgraph.Route
 import com.abra.newsapp.util.Dimens.MediumPadding1
 
 @Composable
 fun BookmarkScreen(
     state: BookmarkState,
-    navigateToDetails: (String) -> Unit,
+    navigateToDetails: (Article) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -40,7 +40,7 @@ fun BookmarkScreen(
             articles = state.articles.map {
                 it.mapToArticle()
             },
-            onClick = { navigateToDetails(Route.DetailsScreen.route) }
+            onClick = { navigateToDetails(it) }
         )
     }
 }

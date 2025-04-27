@@ -7,11 +7,12 @@ import com.abra.newsapp.domain.usecases.appEntry.AppEntryUseCases
 import com.abra.newsapp.domain.usecases.appEntry.ReadAppEntryUseCase
 import com.abra.newsapp.domain.usecases.appEntry.SaveAppEntryUseCase
 import com.abra.newsapp.domain.usecases.news.DeleteNewsArticleUseCase
-import com.abra.newsapp.domain.usecases.news.GetNewsArticlesUseCase
+import com.abra.newsapp.domain.usecases.news.GetArticlesUseCase
 import com.abra.newsapp.domain.usecases.news.GetNewsUseCase
 import com.abra.newsapp.domain.usecases.news.NewsUseCases
 import com.abra.newsapp.domain.usecases.news.SearchNewsUseCase
-import com.abra.newsapp.domain.usecases.news.UpsertNewsArticleUseCase
+import com.abra.newsapp.domain.usecases.news.SelectArticleByUrlUseCase
+import com.abra.newsapp.domain.usecases.news.UpsertArticleUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -38,8 +39,9 @@ object UseCasesModule {
     ):NewsUseCases = NewsUseCases(
         getNewsUseCase = GetNewsUseCase(newsRepository),
         searchNewsUseCase = SearchNewsUseCase(newsRepository),
-        upsertNewsArticleUseCase = UpsertNewsArticleUseCase(dao),
+        upsertArticleUseCase = UpsertArticleUseCase(dao),
         deleteNewsArticleUseCase = DeleteNewsArticleUseCase(dao),
-        getNewsArticlesUseCase = GetNewsArticlesUseCase(dao),
+        getNewsArticlesUseCase = GetArticlesUseCase(dao),
+        selectArticleByUrlUseCase = SelectArticleByUrlUseCase(dao)
     )
 }

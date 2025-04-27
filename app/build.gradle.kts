@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.compose.compiler)
     id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -126,4 +127,5 @@ dependencies {
 
     //Extended Icons
     implementation("androidx.compose.material:material-icons-extended:1.7.8")
+
 }

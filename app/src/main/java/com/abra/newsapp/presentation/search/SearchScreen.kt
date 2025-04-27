@@ -12,16 +12,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.abra.newsapp.domain.model.Article
 import com.abra.newsapp.presentation.common.ArticlesList
 import com.abra.newsapp.presentation.common.SearchBar
-import com.abra.newsapp.presentation.navgraph.Route
 import com.abra.newsapp.util.Dimens
 
 @Composable
 fun SearchScreen(
     state: SearchState,
     event: (SearchEvent) -> Unit,
-    navigate: (String) -> Unit,
+    navigateToDetails: (Article) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -40,7 +40,7 @@ fun SearchScreen(
         Spacer(Modifier.height(4.dp))
         state.articles?.let {
             val artists = it.collectAsLazyPagingItems()
-            ArticlesList(articles = artists, onClick = {navigate(Route.DetailsScreen.route)})
+            ArticlesList(articles = artists, onClick = {navigateToDetails(it)})
         }
     }
 }

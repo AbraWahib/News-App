@@ -27,16 +27,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             NewsAppTheme {
-                Scaffold(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(color = MaterialTheme.colorScheme.background)
-                ) { innerPadding ->
-                    NavGraph(
-                        startDestination = vm.startDestination.value,
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                    NavGraph(startDestination = vm.startDestination.value)
+
             }
         }
     }
